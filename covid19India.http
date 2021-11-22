@@ -44,8 +44,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/states/24/stats/
+GET http://localhost:3000/states/16/stats/
 Content-Type: application/json 
 
 ###
+
+GET http://localhost:3000/districts/12/details/
+Content-Type: application/json 
 

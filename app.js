@@ -123,7 +123,7 @@ app.get("states/:stateId/stats/", async (request, response) => {
      SUM(active),
      SUM(deaths) 
      FROM 
-        district
+        district 
      WHERE 
         state_id = ${stateId};`;
   const dbResponse = await db.get(QueryForGettingRequestedStateStats);
@@ -134,3 +134,17 @@ app.get("states/:stateId/stats/", async (request, response) => {
     totalDeaths: dbResponse["SUM(deaths)"],
   });
 });
+
+app.get("districts/:districtId/details/", async (request, response) => {
+  const { districtId } = request.params;
+  const QueryForGettingTheStateOfDistrict = `
+    SELECT
+     state_name 
+    FROM
+      district NATURAL JOIN state 
+    WHERE district_id = ${districtId} ;`;
+  const dbResponse = await db.get(QueryForGettingTheStateOfDistrict);
+  response.send({ stateName: dbResponse.state_name });
+});
+
+module.exports = app;
